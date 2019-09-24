@@ -122,9 +122,12 @@ services:
       - isle-apache-data:/var/www/html
       ## (Optional): Uncomment line below to allow bind mounting of the php.ini file for editing of php memory, upload and max_post values.
       #- ./config/apache/php_ini/php.demo.ini:/etc/php/7.1/apache2/php.ini
+      - ./config/apache/loc-proxy-cache.conf:/etc/apache2/sites-enabled/loc-proxy-cache.conf
+
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.enable=true
+      # - "traefik.backend.rule=Host:www.loc.gov"
       - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /cantaloupe"
 
 
